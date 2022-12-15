@@ -1,6 +1,6 @@
 # notch-sehll-utils
 
-[![CI Build](https://github.com/dmadunic/gh-demo-lib/actions/workflows/ci.yml/badge.svg)](https://github.com/dmadunic/gh-demo-lib/actions/workflows/ci.yml)
+[![CI Build](https://github.com/wearenotch/notch-shell-utils/actions/workflows/ci.yml/badge.svg)](https://github.com/dmadunic/gh-demo-lib/actions/workflows/ci.yml)
 ![](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white&style=flat)
 
 Library containg various shell utils.
@@ -82,7 +82,7 @@ For more see:
 - Display table with one entity per row
 
 
-For detailed overview of how to use various tools from this library see: piccocli-shell-utils-demo project. 
+For detailed overview of how to use various tools from this library see: [](piccocli-shell-utils-demo) project. 
 
 ## Development
 ### Setup (First time)
