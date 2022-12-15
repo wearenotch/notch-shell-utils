@@ -1,4 +1,4 @@
-# notch-sehll-utils
+# notch-shell-utils
 
 [![CI Build](https://github.com/wearenotch/notch-shell-utils/actions/workflows/ci.yml/badge.svg)](https://github.com/dmadunic/gh-demo-lib/actions/workflows/ci.yml)
 ![](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white&style=flat)
@@ -66,8 +66,16 @@ For more see:
 ## Sheel Tools
 
 ### Working with text output:
-- Chalk
-- ShellUtils
+- Chalk: utility to display text in colors
+```Java
+System.out.println(Chalk.red("This message will be displayed in RED and bolded", true));
+```
+
+- ShellHelper: utility that allows display of contextual messages (info, success, warn, error)
+```Java
+ShellHelper sh = new ShellHelper(terminal);
+sh.printlnInfo("This will be printed in the color configured for INFO messages (default is cyan))");
+```
 
 ### Tracing progress
 
