@@ -5,7 +5,7 @@
 
 Library containg various shell utils.
 
-**Current project version 0.1.0**
+**Current project version 0.1.1**
 
 ## Project dependencies
 
@@ -21,7 +21,7 @@ To use this jar in your project add the following to the dependencies section:
 
 ```groovy
 dependencies {
-    implementation "com.notch.utils:notch-shell-utils:0.1.0"
+    implementation "com.notch.utils:notch-shell-utils:0.1.1"
     ...
 }
 ```
@@ -31,7 +31,7 @@ dependencies {
 <dependency>
   <groupId>com.notch.utils</groupId>
   <artifactId>notch-shell-utils</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
 </dependency>
 ```
 (pom.xml)
