@@ -94,19 +94,8 @@ For detailed overview of how to use various tools from this library see: [](picc
 
 ## Development
 ### Setup (First time)
-1. Clone the repository: `git clone git@github.com:ag04/gh-demo-lib.git`
+1. Clone the repository: `git clone git@github.com:wearenotch/notch-shell-utils`
 4. Build project with: ` ./gradlew clean build `
-
-### Manual Release
-Make sure that file gradle.properties in the folder ${USER_HOME}/.gradle/ contains the following two variables defined:
-
-* github_username
-* github_password : personal github token to be used to install/update packages
-
-1) Commit and push everything
-2) `./gradlew release`
-
-And simply follow the instructions on the console
 
 ### Github Actions release
 
@@ -118,5 +107,14 @@ It will perform the following:
 - Create new Relase with comments from CHANGELOG.md for this release.
 - Update README.md to contain latest version number.
 
+### Manual Release
+Make sure that file gradle.properties in the folder ${USER_HOME}/.gradle/ contains the following two variables defined:
 
+* github_username
+* github_password : personal github token to be used to install/update packages
+
+1) Commit and push everything
+2) `./gradlew release`
+
+And simply follow the instructions on the console
 
