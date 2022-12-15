@@ -1,6 +1,6 @@
 plugins {
     id 'maven-publish'
-    id 'net.researchgate.release'
+    id 'net.researchgate.release' version "${releasePluginVersion}"
     id 'java-library'
     id 'idea'
     id 'org.kordamp.gradle.jandex'
