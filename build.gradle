@@ -49,8 +49,7 @@ repositories {
 }
 
 dependencies {
+    api "org.jline:jline:${jlineVersion}"
+    api "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     implementation "de.vandermeer:asciitable:${asciiTableVersion}"
-    implementation "org.jline:jline:${jlineVersion}"
-    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
-    //implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
 }
