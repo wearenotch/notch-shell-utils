@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        maven {
+            url 'https://search.maven.org/'
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    plugins {
+        id 'net.researchgate.release' version "${releasePluginVersion}"
+        id 'org.kordamp.gradle.jandex' version "${jandexPluginVersion}"
+    }
+}
+
+rootProject.name = 'notch-shell-utils'

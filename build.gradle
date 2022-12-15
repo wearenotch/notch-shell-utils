@@ -1,0 +1,57 @@
+plugins {
+    id 'maven-publish'
+    id 'net.researchgate.release'
+    id 'java-library'
+    id 'idea'
+    id 'org.kordamp.gradle.jandex'
+}
+
+group = 'com.notch.utils'
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId 'com.notch.utils'
+            from components.java
+        }
+    }
+    
+    repositories {
+        if (project.hasProperty('github_username') && project.hasProperty('github_password')) {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/wearenotch/notch-shell-utils")
+                credentials {
+                    username github_username
+                    password github_password
+                }
+            }
+        }
+    }
+}
+
+/*
+release {
+    tagTemplate = '${version}-shell-utils'
+    git {
+        requireBranch.set('master')
+    }
+}*/
+
+afterReleaseBuild.dependsOn publish
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "de.vandermeer:asciitable:${asciiTableVersion}"
+    implementation "org.jline:jline:${jlineVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    //implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
+}
