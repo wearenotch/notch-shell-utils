@@ -40,7 +40,9 @@ And regitser github package as maven repository, as is for example show in the s
 
 ```groovy
 def props = new Properties()
-file(".env").withInputStream { props.load(it) }
+if (file(".env").exists()) {
+    file(".env").withInputStream { props.load(it) }
+}
 
 repositories {
     mavenCentral()
@@ -63,7 +65,7 @@ For more see:
 * [Personal GitHub access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 * [Working with the Gradle registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry)
 
-## Sheel Tools
+## Shell Tools
 
 ### Working with text output:
 - Chalk: utility to display text in colors
