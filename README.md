@@ -5,7 +5,7 @@
 
 Library containg various shell utils.
 
-**Current project version 0.1.1**
+**Current project version 0.1.2**
 
 ## Project dependencies
 
@@ -21,7 +21,7 @@ To use this jar in your project add the following to the dependencies section:
 
 ```groovy
 dependencies {
-    implementation "com.notch.utils:notch-shell-utils:0.1.1"
+    implementation "com.notch.utils:notch-shell-utils:0.1.2"
     ...
 }
 ```
@@ -31,7 +31,7 @@ dependencies {
 <dependency>
   <groupId>com.notch.utils</groupId>
   <artifactId>notch-shell-utils</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
 </dependency>
 ```
 (pom.xml)
@@ -75,6 +75,8 @@ System.out.println(Chalk.red("This message will be displayed in RED and bolded",
 
 - ShellHelper: utility that allows display of contextual messages (info, success, warn, error)
 ```Java
+org.jline.terminal.Terminal terminal = org.jline.terminal.TerminalBuilder.builder().build();
+
 ShellHelper sh = new ShellHelper(terminal);
 sh.printlnInfo("This will be printed in the color configured for INFO messages (default is cyan))");
 ```
@@ -85,7 +87,88 @@ sh.printlnInfo("This will be printed in the color configured for INFO messages (
 - ProgressCounter
 
 ### Capturing user input
-- **NOT IMPLEMENTED IN THE MOMENT (comming soon)**
+- InputReader - util class to ask user for input
+
+To construct instance of the InputReader run either:
+```Java
+InputReader reader = new InputReader(lineReader, shellHelper, "yellow", "*");
+```
+or
+```Java
+InputReader reader = new InputReader(lineReader, shellHelper);
+```
+The later will use **cyan** as default color for info messages and **'*'** for mask when capturing sensitive input (ie. credentials)
+
+LineReader useed in constructor of the InputReader can be constructed for example by running the following commands:
+```Java
+org.jline.reader.History history = new org.jline.reader.impl.history.DefaultHistory;();
+org.jline.reader.DefaultParser parser = new DefaultParser();
+parser.setEofOnUnclosedQuote(true);
+parser.setEofOnEscapedNewLine(true);
+
+LineReaderBuilder lineReaderBuilder = LineReaderBuilder.builder()
+    .terminal(terminal)
+    .history(history)
+    .highlighter(new Highlighter() {
+
+        @Override
+        public AttributedString highlight(LineReader reader, String buffer) {
+            return new AttributedString(
+                buffer,
+                AttributedStyle.BOLD.foreground(AttributedStyle.WHITE)
+            );
+        }
+                
+        @Override
+        public void setErrorPattern(Pattern errorPattern) {
+        }
+
+        @Override
+        public void setErrorIndex(int errorIndex) {
+        }
+    }).parser(parser);
+
+LineReader lineReader = lineReaderBuilder.build();
+lineReader.unsetOpt(LineReader.Option.INSERT_TAB);
+```
+
+For more details on how to construct Histroy, Parser, Completer and Highliter see official [jLine docs](https://github.com/jline/jline3/wiki).
+
+#### Available methods:
+
+1. Capture of free user input:
+```Java
+reader.prompt("Enter some text:")
+```
+or
+```Java
+reader.prompt("Enter some text:", "Default Value to return if user does not enter anything")
+```
+
+2. Capture sensitive data (credentials)
+```Java
+reader.prompt("Enter password", null, false)
+```
+
+3. Prompt for one of options
+Loops until one of the `options` is provided. Pressing return is equivalent to returning `defaultValue`.
+
+Passing null for defaultValue signifies that there is no default value.
+
+Passing "" or null among optionsAsList means that empty answer is allowed, in these cases this method returns empty String "" as the result of its execution.
+
+For example the following will prompt user to enter one of the following: 'a', 'b', 'c' or 'q' with 'a' being returned as default value.
+```Java
+List options = Arrays.asList(new String[]{"a", "b", "c", "q"}); 
+reader.promptWithOptions("Enter one of the values (a*,b,c, q)", "a", options);
+```
+
+4. Prompt user to select one value from the list of options, printing each option on its own line
+
+```Java
+reader.selectFromList(String headingMessage, String promptMessage, Map<String, String> options, boolean ignoreCase, String defaultValue);
+```
+
 
 ### Tables
 - Display entity as table
